@@ -12,8 +12,7 @@ sh 'sleep 3' // Simulation du build
  stage('Tests Unitaires') {
  steps {
  echo "Exécution des tests unitaires..."
-sh 'sleep 2' // Simulation des tests 
-unitaires
+sh 'sleep 2' // Simulation des tests unitaires
  }
  }
  stage('Analyse Qualité') {
