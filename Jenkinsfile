@@ -1,16 +1,22 @@
 pipeline {
  agent any
  environment {
- DOCKER_USER = 'lazydev79'
+ ARTIFACT_NAME = 'app.tar.gz'
  }
  stages {
- stage('Login Docker') {
+ stage('Build') {
  steps {
- withCredentials([string(credentialsId: 
-'DOCKER_PASSWORD_SCOL', variable: 'DOCKER_PASSWORD_SCOL')]) {
- sh 'echo $DOCKER_PASSWORD_SCOL | docker login -u $DOCKER_USER --password-stdin'
+ sh 'echo "Contenu de l\'application" > app.txt'
+ sh 'tar -czf ${ARTIFACT_NAME} app.txt'
+ archiveArtifacts artifacts: ARTIFACT_NAME, 
+fingerprint: true
  }
+ }
+ stage('Deploy') {
+ steps {
+ echo "Déploiement de ${ARTIFACT_NAME}"
  }
  }
  }
 }
+
