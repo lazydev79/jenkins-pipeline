@@ -19,8 +19,7 @@ currentBuild.result = 'FAILURE'
  failure {
  echo "Le pipeline a échoué, envoi d’une notification..."
  sh 'echo "Erreur détectée" > erreur.log'
- archiveArtifacts artifacts: 'erreur.log', fingerprint: 
-true
+ archiveArtifacts artifacts: 'erreur.log', fingerprint: true
  }
  success {
  echo "Pipeline exécuté avec succès !"
